@@ -4,12 +4,19 @@ import glfw
 import math
 
 class Asteroide:
+
     posicion_x = -0.2
     posicion_y = 0.0
     posicion_z = 0.0
 
     direccion = 120.0
     velocidad = 1.2
+
+    def __init__(self, x, y, direccion, velocidad):
+        self.posiscion_x = x
+        self.posicion_y = y
+        self.direccion = direccion
+        self.velocidad = velocidad
 
     def actualizar(self, tiempo_delta):
         
@@ -43,6 +50,14 @@ class Asteroide:
         glVertex3f(0.05,0.05,0.0)
         glVertex3f(0.05,-0.05,0.0)
         glVertex3f(-0.05,-0.05,0.0)
+        glEnd()
+        
+        glBegin(GL_LINE_LOOP)
+        glColor3f(0.0, 0.0, 0.0)
+        glVertex3f(-0.05, -0.05, 0)
+        glVertex3f(-0.05,0.05,0.0)
+        glVertex3f(0.05, 0.05,0.0)
+        glVertex3f(0.05,-0.05,0.0)
         glEnd()
 
         glPopMatrix()
