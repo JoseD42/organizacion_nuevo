@@ -3,11 +3,10 @@ from glew_wish import *
 import glfw
 import math
 from Bala import *
+from Modelo import *
 
-class Nave:
-    posicion_x = 0.0
-    posicion_y = 0.0
-    posicion_z = 0.0
+class Nave(Modelo):
+    
     velocidad = 0.5
     angulo = 0.0
     fase = 90.0
