@@ -24,8 +24,15 @@ def actualizar():
 
     nave.actualizar(window, tiempo_delta)
     for asteroide in asteroides:
-        asteroide.actualizar(tiempo_delta)
-    
+        if asteroide.vivo:
+            asteroide.actualizar(tiempo_delta)
+            if asteroide.colisionando(nave):
+                nave.herido = True
+            for bala in nave.balas:
+                if bala.disparando:
+                    if asteroide.colisionando(bala):
+                        bala.disparando = False
+                        asteroide.vivo = False  
     tiempo_anterior = tiempo_actual
     
 def colisionando():
@@ -48,7 +55,7 @@ def inicializar_asteroides():
         posicion_x = (random.random() * 2) - 1
         posicion_y = (random.random() * 2) - 1
         direccion = random.random() * 360
-        velocidad = (random.random() * 0.5) + 0.5
+        velocidad = (random.random() * 0.5)
         asteroides.append(Asteroide(posicion_x, posicion_y, 
             direccion, velocidad))
 

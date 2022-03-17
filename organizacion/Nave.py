@@ -13,9 +13,14 @@ class Nave(Modelo):
     velocidad_rotacion = 90.0
     balas = [Bala(), Bala(), Bala(), Bala(), Bala(), Bala(), Bala(), Bala(), Bala(), Bala()]
     estado_anterior_espacio = glfw.RELEASE
+    herido = False
 
     def __init__(self):
         super().__init__(0.0,0.0,0.0,0.5,0.0)
+        self.extremo_izquierdo = 0.05
+        self.extremo_derecho = 0.05
+        self.extremo_inferior = 0.05
+        self.extremo_superior = 0.05
 
     def dibujar(self):
 
@@ -27,7 +32,10 @@ class Nave(Modelo):
         glRotatef(self.direccion, 0.0, 0.0, 1.0)
         glBegin(GL_TRIANGLES)
 
-        glColor3f(1,0,0)
+        if not self.herido:
+            glColor3f(0.0,0.0,1.0)
+        else:
+            glColor3f(1.0,0.0,0.0)
 
         #Manda vertices a dibujar
         glVertex3f(-0.05,-0.05,0)
@@ -35,16 +43,9 @@ class Nave(Modelo):
         glVertex3f(0.05,-0.05,0)
 
         glEnd()
-
-        glBegin(GL_LINE_LOOP)
-        glColor3f(0.0, 0.0, 0.0)
-        glVertex3f(-0.05, -0.05, 0)
-        glVertex3f(-0.05,0.05,0.0)
-        glVertex3f(0.05, 0.05,0.0)
-        glVertex3f(0.05,-0.05,0.0)
-        glEnd()
-
         glPopMatrix()
+
+        #self.dibujar_bounding_box()
 
 
     def actualizar(self, window, tiempo_delta):

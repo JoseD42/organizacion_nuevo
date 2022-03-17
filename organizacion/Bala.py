@@ -10,6 +10,10 @@ class Bala(Modelo):
 
     def __init__(self):
         super().__init__(velocidad = 0.75)
+        self.extremo_izquierdo = 0.01
+        self.extremo_derecho = 0.01
+        self.extremo_inferior = 0.01
+        self.extremo_superior = 0.01
 
     def dibujar(self):
 
@@ -19,13 +23,12 @@ class Bala(Modelo):
 
                 glTranslatef(self.posicion_x, self.posicion_y, self.posicion_z)
                 glBegin(GL_QUADS)
-                glColor3f(0.0, 0.0, 0.0)
+                glColor3f(0.3, 0.3, 0.3)
                 glVertex3f(-0.01,0.01,0.0)
                 glVertex3f(0.01,0.01,0.0)
                 glVertex3f(0.01,-0.01,0.0)
                 glVertex3f(-0.01,-0.01,0.0)
                 glEnd()
-
                 glPopMatrix()
 
     def actualizar(self, tiempo_delta):
